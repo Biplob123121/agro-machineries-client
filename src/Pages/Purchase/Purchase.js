@@ -1,17 +1,69 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Purchase = () => {
     const { productId } = useParams();
+    const numRef = useRef(0);
     const [product, setProduct] = useState({});
+    const [orderQuantity, setOrderQuantity] = useState(100);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
         fetch(`http://localhost:5000/product/${productId}`)
             .then(res => res.json())
-            .then(data => setProduct(data));
+            .then(data => {
+                setProduct(data);
+                if (data.price) {
+                    setTotalPrice(data.price * 100);
+                }
+            });
     }, [productId]);
 
-    console.log(product);
+    const decreasingQuantity = () => {
+        const currenQuantity = numRef.current.value;
+        if (currenQuantity > product.minOrder) {
+            const newQuantity = parseInt(currenQuantity) - 1;
+            setOrderQuantity(newQuantity);
+            setTotalPrice(newQuantity * product.price);
+        }
+        else{
+            toast.error('You can not decrease quantity number. It is your minimum quantity to order!!')
+        }
+     };
+
+    const increasingQuantity = () => {
+        const currenQuantity = numRef.current.value;
+        if (currenQuantity < product.quantity) {
+            const newQuantity = parseInt(currenQuantity) + 1;
+            setOrderQuantity(newQuantity);
+            setTotalPrice(newQuantity * product.price);
+        }
+        else{
+            toast.error('You can not increase quantity number. Our stock is over!!')
+        }
+    };
+
+    const placeOrder = () =>{
+        const data = {
+            name : `${product.name}`,
+            quantity : orderQuantity,
+            price : totalPrice
+        }
+        fetch('http://localhost:5000/order', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.acknowledged === true) {
+                    toast('Order completed. To make payment go to Dashboard');
+                }
+            })
+    }
 
     return (
         <section>
@@ -34,16 +86,16 @@ const Purchase = () => {
                     <h4 className='text-2xl text-center font-bold'>Manage Your Product Quantity</h4>
                     <div className='flex justify-center items-center max-w-screen'>
                         <div className="grid sm:grid-cols-1">
-                            <button className="btn bg-sky-500/75 border-0 font-bold text-white text-3xl my-2 px-12">-</button>
-                            <input className='text-center border-4 py-2' type="number" value={product.minOrder} name='quantity' readOnly />
-                            <button className="btn bg-sky-500/75 border-0 font-bold text-white text-3xl my-2 px-12">+</button>
+                            <button onClick={decreasingQuantity} className="btn bg-sky-500/75 border-0 font-bold text-white text-3xl my-2 px-12">-</button>
+                            <input ref={numRef} className='text-center border-4 py-2' type="number" value={orderQuantity} name='quantity' readOnly />
+                            <button onClick={increasingQuantity} className="btn bg-sky-500/75 border-0 font-bold text-white text-3xl my-2 px-12">+</button>
                         </div>
                     </div>
                 </div>
             </div>
             <h2 className='text-4xl text-primary font-bold text-center py-8'>Order Overview :</h2>
-            <div class="overflow-x-auto">
-                <table class="table w-full">
+            <div className="overflow-x-auto">
+                <table className="table w-full">
                     <thead>
                         <tr>
                             <th></th>
@@ -56,14 +108,14 @@ const Purchase = () => {
                         <tr>
                             <th>1</th>
                             <td>{product.name}</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
+                            <td>{orderQuantity}</td>
+                            <td>{totalPrice}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div className='flex justify-center py-12'>
-            <button className="btn btn-wide border-0 uppercase text-white font-bold bg-gradient-to-r from-secondary to-primary hover:from-red-500 hover:to-yellow-500">Order Now</button>
+                <button onClick={placeOrder} className="btn btn-wide border-0 uppercase text-white font-bold bg-gradient-to-r from-secondary to-primary hover:from-red-500 hover:to-yellow-500">Order Now</button>
             </div>
         </section>
     );

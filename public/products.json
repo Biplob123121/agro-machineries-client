@@ -1,29 +1,26 @@
 [
     {
-      "_id" : 1,
       "picture": "https://i.ibb.co/3RhsF1V/pic-1.png",
       "name": "LINER PISTON",
       "description": "This Liner Piston is very good quality made by pure iron in Bangladesh.",
       "price": "1700",
       "quantity" : "2000",
-      "minOrder" : "500"
+      "minOrder" : "100"
     },
     {
-      "_id" : 2,
       "picture": "https://i.ibb.co/xqmP0XF/pic-2.png",
       "name": "STEEL PULLEY",
       "description": "It is made by Steel. It's longivity is very high. It is a gurrented product.",
       "price": "2100",
       "quantity" :"2200",
-      "minOrder" : "400"
+      "minOrder" : "100"
     },
     {
-      "_id" : 3,
       "picture": "https://i.ibb.co/Bt7Qk4D/pic-3.png",
       "name": "WATER PUMP",
       "description": "This water pump is the best quality product in the world. It's working power is very high.",
       "price": "3700",
       "quantity" :"1500",
-      "minOrder" : "300"
+      "minOrder" : "100"
     }
   ]
