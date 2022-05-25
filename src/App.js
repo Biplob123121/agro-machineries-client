@@ -8,6 +8,7 @@ import Header from './Pages/Shared/Header';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Login/Register';
 import Blogs from './Pages/Login/Blogs/Blogs';
+import Purchase from './Pages/Purchase/Purchase';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/product/:productId" element={<Purchase />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

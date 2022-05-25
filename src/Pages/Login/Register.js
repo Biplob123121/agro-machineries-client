@@ -38,7 +38,7 @@ const Register = () => {
     }
 
     if (token) {
-        navigate('/appointment');
+        navigate('/home');
     }
 
     return (
