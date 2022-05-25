@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import auth from '../../firebase.init';
 
 const Purchase = () => {
     const { productId } = useParams();
+    const [user] = useAuthState(auth);
     const numRef = useRef(0);
     const [product, setProduct] = useState({});
     const [orderQuantity, setOrderQuantity] = useState(100);
@@ -48,7 +51,8 @@ const Purchase = () => {
         const data = {
             name : `${product.name}`,
             quantity : orderQuantity,
-            price : totalPrice
+            price : totalPrice,
+            email : `${user.email}`
         }
         fetch('http://localhost:5000/order', {
             method: 'POST',

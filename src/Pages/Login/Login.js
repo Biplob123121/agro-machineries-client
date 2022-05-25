@@ -35,7 +35,7 @@ const Login = () => {
         signInWithEmailAndPassword(data.email, data.password);
     }
 
-    if (token) {
+    if (user) {
         navigate(from, { replace: true });
     }
     return (
