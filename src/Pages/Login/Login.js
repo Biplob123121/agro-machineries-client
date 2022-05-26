@@ -35,7 +35,7 @@ const Login = () => {
         signInWithEmailAndPassword(data.email, data.password);
     }
 
-    if (user) {
+    if (token) {
         navigate(from, { replace: true });
     }
     return (
@@ -95,7 +95,7 @@ const Login = () => {
                         {signInError}
                         <input className='btn w-full max-w-xs' type="submit" value='Login' />
                     </form>
-                    <p>New to Doctors Portal? <Link className='text-primary' to='/signup'>Create An Account</Link></p>
+                    <p>New to Agro Machineries? <Link className='text-primary' to='/signup'>Create An Account</Link></p>
                     <div className="divider">OR</div>
                     <button
                         onClick={() => signInWithGoogle()}

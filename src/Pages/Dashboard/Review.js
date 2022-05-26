@@ -36,8 +36,9 @@ const Review = () => {
     };
     return (
         <section>
+            <h2 className='text-2xl font-bold text-center my-8'>Give Your Review :</h2>
             <div className='w-1/2 mx-auto'>
-                <form className='add-item-form' onSubmit={handleSubmit(onSubmit)}>
+                <form  onSubmit={handleSubmit(onSubmit)}>
                     <input type="text" placeholder="Name" value={user.displayName} className="input w-full my-4" readOnly disabled />
                     <input type="text" placeholder="Email" value={user.email} className="input w-full" readOnly disabled />
                     <textarea className="textarea textarea-bordered w-full my-4" {...register("review")} placeholder="Give Your Review" required></textarea>

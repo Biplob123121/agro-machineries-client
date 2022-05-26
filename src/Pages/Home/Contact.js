@@ -3,7 +3,7 @@ import React from 'react';
 const Contact = () => {
     return (
         <div>
-            <h2 className='text-4xl text-center font-bold text-primary'>Ask Your Question</h2>
+            <h2 className='text-4xl text-center font-bold text-primary mt-12'>Ask Your Question</h2>
             <div className='lg:w-1/2 mx-auto'>
                 <form className='add-item-form'>
                     <input type="text" placeholder=" Enter Your Name" className="input w-full input-bordered my-4"  required/>
