@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import Loading from '../Shared/Loading';
+import MyOrderList from './MyOrderList';
 
 const MyOrder = () => {
     const [user] = useAuthState(auth);
-    const [order, setOrder] = useState({});
+    const [orders, setOrders] = useState([]);
 
-    useEffect( () =>{
-        const url =`http://localhost:5000/order/${user?.email}`;
-        console.log(url);
+    useEffect(() => {
+        const url = `http://localhost:5000/dashboard/order/${user?.email}`;
         fetch(url, {
-            method : 'GET',
-            headers : {
-                'content-type' : 'application/json'
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json'
             }
         })
-        .then(res => res.json())
-        .then(data => setOrder(data));
+            .then(res => res.json())
+            .then(data => setOrders(data));
 
     }, [user?.email]);
+
+    if (!user) {
+        return <Loading></Loading>
+    }
 
     return (
         <section>
@@ -35,13 +40,13 @@ const MyOrder = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>{order.name}</td>
-                            <td>{order.quantity}</td>
-                            <td>{order.price}</td>
-                            <td><button className="btn btn-primary">Pay now</button></td>
-                        </tr>
+                        {
+                            orders.map((order, index)=> <MyOrderList
+                            key={order._id}
+                            order ={order}
+                            index ={index}
+                            ></MyOrderList>)
+                        }
                     </tbody>
                 </table>
             </div>

@@ -9,9 +9,11 @@ const AllReview = () => {
             .then(data => setReviews(data));
     }, []);
 
+    
+
     return (
         <div>
-            <h2 className='text-4xl font-bold text-center text-primary my-8'>Client Review : {reviews.length}</h2>
+            <h2 className='text-4xl font-bold text-center text-primary my-8'>Recent Client Review : {reviews.length}</h2>
             <div className='grid sm:grid-cols-1  lg:grid-cols-3 gap-4'>
                 {
                     reviews.map(review => <div key={review._id}>
