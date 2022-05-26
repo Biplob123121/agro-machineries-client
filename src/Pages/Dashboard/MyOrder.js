@@ -4,8 +4,6 @@ import auth from '../../firebase.init';
 
 const MyOrder = () => {
     const [user] = useAuthState(auth);
-    // const email = user?.email;
-    // console.log(email);
     const [order, setOrder] = useState({});
 
     useEffect( () =>{
