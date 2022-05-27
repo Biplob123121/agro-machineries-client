@@ -7,7 +7,6 @@ import About from './Pages/About/About';
 import Header from './Pages/Shared/Header';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Login/Register';
-import Blogs from './Pages/Login/Blogs/Blogs';
 import Purchase from './Pages/Purchase/Purchase';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import MyOrder from './Pages/Dashboard/MyOrder';
@@ -19,6 +18,7 @@ import Users from './Pages/Dashboard/Users';
 import AddProduct from './Pages/Dashboard/AddProduct';
 import Payment from './Pages/Dashboard/Payment';
 import Portfolio from './Pages/Portfolio.js/Portfolio';
+import Blogs from './Pages/Blogs/Blogs';
 
 
 function App() {
