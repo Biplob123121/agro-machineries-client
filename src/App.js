@@ -19,6 +19,7 @@ import AddProduct from './Pages/Dashboard/AddProduct';
 import Payment from './Pages/Dashboard/Payment';
 import Portfolio from './Pages/Portfolio.js/Portfolio';
 import Blogs from './Pages/Blogs/Blogs';
+import NotFound from './Pages/Shared/NotFound';
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer />
     </div>
