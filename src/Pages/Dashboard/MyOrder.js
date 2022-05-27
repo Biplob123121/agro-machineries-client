@@ -9,17 +9,20 @@ const MyOrder = () => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        const url = `https://dry-spire-96844.herokuapp.com/order/${user?.email}`;
-        fetch(url, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json'
-            }
-        })
-            .then(res => res.json())
-            .then(data => setOrders(data));
+        if (user) {
+            const url = `https://dry-spire-96844.herokuapp.com/order/${user?.email}`;
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(data => setOrders(data));
+        }
 
-    }, [user?.email]);
+
+    }, [user]);
 
     if (!user) {
         return <Loading></Loading>
@@ -41,10 +44,10 @@ const MyOrder = () => {
                     </thead>
                     <tbody>
                         {
-                            orders.map((order, index)=> <MyOrderList
-                            key={order._id}
-                            order ={order}
-                            index ={index}
+                            orders.map((order, index) => <MyOrderList
+                                key={order._id}
+                                order={order}
+                                index={index}
                             ></MyOrderList>)
                         }
                     </tbody>
