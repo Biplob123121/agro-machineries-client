@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+import Loading from '../Shared/Loading';
 
 const CheckoutForm = ({ order }) => {
+    const [user] = useAuthState(auth);
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState('');
@@ -10,7 +14,7 @@ const CheckoutForm = ({ order }) => {
     const [transactionId, setTransactionId] = useState('');
     const [clientSecret, setClientSecret] = useState('');
 
-    const { _id, price, name, quantity } = order;
+    const { _id, price} = order;
 
     useEffect(() => {
         fetch('http://localhost:5000/create-payment-intent', {
@@ -29,6 +33,10 @@ const CheckoutForm = ({ order }) => {
             });
 
     }, [price])
+
+    if(!user){
+        return <Loading></Loading>
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -51,15 +59,15 @@ const CheckoutForm = ({ order }) => {
         setCardError(error?.message || '')
         setSuccess('');
         setProcessing(true);
-        // confirm card payment
+        //card payment
         const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(
             clientSecret,
             {
                 payment_method: {
                     card: card,
                     billing_details: {
-                        name: name,
-                        quantity: quantity
+                        name:`${user?.name}`,
+                        email: `${user?.email}`
                     },
                 },
             },
@@ -73,9 +81,10 @@ const CheckoutForm = ({ order }) => {
             setCardError('');
             setTransactionId(paymentIntent.id);
             console.log(paymentIntent);
-            setSuccess('Congrats! Your payment is completed.')
+            setSuccess('Thank You for Your Payment.')
 
             //store payment on database
+
             const payment = {
                 order: _id,
                 transactionId: paymentIntent.id
@@ -90,7 +99,6 @@ const CheckoutForm = ({ order }) => {
             }).then(res => res.json())
                 .then(data => {
                     setProcessing(false);
-                    console.log(data);
                 })
 
         }

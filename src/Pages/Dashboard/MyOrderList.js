@@ -10,7 +10,7 @@ const MyOrderList = ({order, index}) => {
             <td>{order.price}</td>
             <td>{!order.paid &&
                 <Link to={`/dashboard/payment/${order._id}`}><button className="btn btn-primary">Pay now</button></Link>}
-                {order.paid && <span className='rext-secondary'>paid</span>
+                {order.paid && <span className='text-secondary font-bold uppercase'>paid</span>
                 }
             </td>
         </tr>
