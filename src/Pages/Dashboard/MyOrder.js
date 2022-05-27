@@ -9,19 +9,15 @@ const MyOrder = () => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        if (user) {
-            const url = `https://dry-spire-96844.herokuapp.com/dashboard/order/${user?.email}`;
-            fetch(url, {
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json'
-                }
-            })
-                .then(res => res.json())
-                .then(data => setOrders(data));
-        }
-
-
+        const url = `https://dry-spire-96844.herokuapp.com/dashboard/order/${user?.email}`;
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => setOrders(data));
     }, [user]);
 
     if (!user) {
