@@ -7,7 +7,7 @@ const AddProduct = () => {
 
     const onSubmit = data => {
 
-        const url = `http://localhost:5000/product`;
+        const url = `https://dry-spire-96844.herokuapp.com/product`;
         fetch(url, {
             method: 'POST',
             headers: {
