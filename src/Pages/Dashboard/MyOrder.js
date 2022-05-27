@@ -10,7 +10,7 @@ const MyOrder = () => {
 
     useEffect(() => {
         if (user) {
-            const url = `https://dry-spire-96844.herokuapp.com/order/${user?.email}`;
+            const url = `https://dry-spire-96844.herokuapp.com/dashboard/order/${user?.email}`;
             fetch(url, {
                 method: 'GET',
                 headers: {
