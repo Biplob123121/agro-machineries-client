@@ -9,7 +9,7 @@ const MyOrder = () => {
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        const url = `https://dry-spire-96844.herokuapp.com/dashboard/order/${user?.email}`;
+        const url = `https://safe-hollows-65617.herokuapp.com/dashboard/order/${user?.email}`;
         fetch(url, {
             method: 'GET',
             headers: {

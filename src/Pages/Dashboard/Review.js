@@ -18,7 +18,7 @@ const Review = () => {
         };
         const data = Object.assign(supplierData, d);
 
-        const url = `https://dry-spire-96844.herokuapp.com/review`;
+        const url = `https://safe-hollows-65617.herokuapp.com/review`;
         fetch(url, {
             method: 'POST',
             headers: {

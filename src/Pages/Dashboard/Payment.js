@@ -11,7 +11,7 @@ const stripePromise = loadStripe('pk_test_51L3keWF4SoqMxoQLeTf3GaNQvbPw07dwZXRd6
 
 const Payment = () => {
     const {payId} =useParams();
-    const url = `https://dry-spire-96844.herokuapp.com/order/${payId}`;
+    const url = `https://safe-hollows-65617.herokuapp.com/order/${payId}`;
 
     const {data : order, isLoading} = useQuery(['order', payId], () => fetch(url,{
         method: 'GET',

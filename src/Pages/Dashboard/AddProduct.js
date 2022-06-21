@@ -7,7 +7,7 @@ const AddProduct = () => {
 
     const onSubmit = data => {
 
-        const url = `https://dry-spire-96844.herokuapp.com/product`;
+        const url = `https://safe-hollows-65617.herokuapp.com/product`;
         fetch(url, {
             method: 'POST',
             headers: {

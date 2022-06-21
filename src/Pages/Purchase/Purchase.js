@@ -13,7 +13,7 @@ const Purchase = () => {
     const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
-        fetch(`https://dry-spire-96844.herokuapp.com/product/${productId}`)
+        fetch(`https://safe-hollows-65617.herokuapp.com/product/${productId}`)
             .then(res => res.json())
             .then(data => {
                 setProduct(data);
@@ -54,7 +54,7 @@ const Purchase = () => {
             price : totalPrice,
             email : `${user.email}`
         }
-        fetch('https://dry-spire-96844.herokuapp.com/order', {
+        fetch('https://safe-hollows-65617.herokuapp.com/order', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

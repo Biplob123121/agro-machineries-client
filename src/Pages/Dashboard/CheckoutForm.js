@@ -17,7 +17,7 @@ const CheckoutForm = ({ order }) => {
     const { _id, price} = order;
 
     useEffect(() => {
-        fetch('https://dry-spire-96844.herokuapp.com/create-payment-intent', {
+        fetch('https://safe-hollows-65617.herokuapp.com/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
